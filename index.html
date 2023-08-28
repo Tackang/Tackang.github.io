@@ -4,6 +4,25 @@
   <title>Ecological Sensing AI Lab MMS trajectory</title>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAjP2B6Owwx2GMgsc8jqRi68sDZ2Lbnaz0&region=KR&language=en"></script>
   <script>
+      function loadKmlLayersSequentially(urls, map, index = 0) {
+      if (index >= urls.length) return;
+
+      var layer = new google.maps.KmlLayer({
+        url: urls[index],
+        map: map
+      });
+
+      google.maps.event.addListenerOnce(layer, 'status_changed', function() {
+        console.log('Loading:', urls[index]);
+        if (layer.getStatus() === 'OK') {
+          console.log('Successfully loaded:', urls[index]);
+          loadKmlLayersSequentially(urls, map, index + 1);
+        } else {
+          console.error('Failed to load KML layer:', urls[index]);
+        }
+      });
+    }
+
     function initialize() {
       var mapOptions = {
         zoom: 10,
@@ -11,8 +30,8 @@
       };
 
       var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-      
-      var kmlUrls = [
+
+ var kmlUrls = [
         'https://raw.githubusercontent.com/Tackang/Tackang.github.io/main/MMS_route_KML/210803_Suwon_Ginkgo_route.kml',
         'https://raw.githubusercontent.com/Tackang/Tackang.github.io/main/MMS_route_KML/210803_Suwon_Zelkova_route.kml',
         'https://raw.githubusercontent.com/Tackang/Tackang.github.io/main/MMS_route_KML/210811_Suwon_Zelkova_route.kml',
@@ -47,32 +66,8 @@
         // Add more KML URLs here
       ];
 
-// New function to load KML layers sequentially
-function loadKmlLayersSequentially(urls, map, index = 0) {
-  if (index >= urls.length) return;
-
-  var layer = new google.maps.KmlLayer({
-    url: urls[index],
-    map: map
-  });
-
-  google.maps.event.addListenerOnce(layer, 'status_changed', function() {
-    if (layer.getStatus() === 'OK') {
-      // Load next layer
-      loadKmlLayersSequentially(urls, map, index + 1);
-    } else {
-      console.error('Failed to load KML layer:', urls[index]);
+      loadKmlLayersSequentially(kmlUrls, map);
     }
-  });
-}
-
-// Modify the initialize function
-function initialize() {
-  // existing code for map initialization
-  var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-
-  loadKmlLayersSequentially(kmlUrls, map);
-}
 
     google.maps.event.addDomListener(window, 'load', initialize);
   </script>
