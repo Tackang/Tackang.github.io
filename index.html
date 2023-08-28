@@ -7,13 +7,12 @@
     function initialize() {
       var mapOptions = {
         zoom: 10,
-        center: new google.maps.LatLng(-34.397, 150.644)
+        center: new google.maps.LatLng(37.17, 127.00)
       };
 
       var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
       var kmlLayer = new google.maps.KmlLayer({
-        // url: 'http://path/to/your.kml',
         url: 'https://raw.githubusercontent.com/Tackang/Tackang.github.io/main/MMS_route_KML/230827_Suwon_1500hr.kml',
         map: map
       });
@@ -23,6 +22,6 @@
   </script>
 </head>
 <body>
-  <div id="map-canvas" style="height: 500px; width: 100%;"></div>
+  <div id="map-canvas" style="height: 1000px; width: 50%;"></div>
 </body>
 </html>
