@@ -18,6 +18,17 @@
 .ol-touch .search-layer {
   top: 80px;
 }
+#textArea {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 300px;  /* Adjust the width as needed */
+    height: 100%;
+    background-color: #f8f8f8;
+    overflow-y: auto;  /* To add scroll if the content overflows */
+    padding: 15px;
+}
+
 </style>
         <style>
         html, body {
@@ -56,6 +67,14 @@
                 <a href="#" id="popup-closer" class="ol-popup-closer"></a>
                 <div id="popup-content"></div>
             </div>
+        </div>
+        <div id="textArea">
+            <h2>Ecological Sensing AI Lab MMS collection</h2>
+            <p> Contact : didxorkd@snu.ac.kr
+            <!-- Add more text or other HTML elements as needed -->
+            </p>
+            <img src="./2-1.JPG"  width="250" height="200">
+            <img src="./lab_logo.png"  width="250" height="50">
         </div>
         <script src="resources/qgis2web_expressions.js"></script>
         <script src="resources/polyfills.js"></script>
